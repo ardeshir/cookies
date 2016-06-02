@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head><title>Index Page</title>
+</head>
+<body>
+<h1>Index list...</h1>
+
+{{range .}}
+	<div><a href="/page/{{.GUID}}">{{.Title}}</a></div>
+	<p>{{.Content}}</p>
+	<div>{{.Date}}</div><br/>
+{{end}}
+
+</body>
+</html>
+
