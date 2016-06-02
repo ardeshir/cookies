@@ -14,8 +14,8 @@ import (
 const (
 	DBHost  = "127.0.0.1"
 	DBPort  = ":3306"
-	DBUser  = "root"
-	DBPass  = "Casey4ever"
+	DBUser  = "cmsdbadmin"
+	DBPass  = "cmsdbadmin"
 	DBDbase = "CMS"
 	port  = ":8090"
 )
@@ -65,9 +65,7 @@ func ServePage(w http.ResponseWriter, r *http.Request) {
 		log.Println("Couldn't get page " + pageGUID)
 		return
 	}
-	/* html := `<html><head><title>` + thisPage.Title + `</title></head><body><h1>` + thisPage.Title + `</h1><div>` +
-		thisPage.Content + `</div></body></html>`
-	fmt.Fprintln(w, html) */
+
 	t, _ := template.ParseFiles("templates/blog.html")
 	t.Execute(w, thisPage)
 }
@@ -75,10 +73,6 @@ func ServePage(w http.ResponseWriter, r *http.Request) {
 func startHandler(w http.ResponseWriter, r *http.Request) {
 	tp, _ := template.ParseFiles("templates/start.html")
         tp.Execute(w,nil)
- 
-
-
-
 }
 
 func middleHandler(w http.ResponseWriter, r *http.Request) {
@@ -119,6 +113,7 @@ func main() {
 	routes.HandleFunc("/page/{guid:[0-9a-zA\\-]+}", ServePage)
 	routes.HandleFunc("/", RedirIndex)
 	routes.HandleFunc("/home", ServeIndex)
+    routes.HandleFunc("/start", startHandler)
 	routes.HandleFunc("/view", middleHandler)
 	routes.HandleFunc("/finish", finishHandler)
 	http.Handle("/", routes)
