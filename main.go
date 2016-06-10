@@ -98,6 +98,17 @@ func RedirIndex(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/home", 301)
 }
 
+func (p Page) TruncatedText() string {
+	chars := 0
+		for i, _ := range p.Content {
+			chars++
+				if chars > 100 {
+					return p.Content[:i] + `...`
+				}
+		}
+	return p.Content
+}
+
 func main() {
 
 	dbConn := fmt.Sprintf("%s:%s@/%s", DBUser, DBPass, DBDbase)
