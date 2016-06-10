@@ -98,7 +98,7 @@ func RedirIndex(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/home", 301)
 }
 
-func (p Page) TruncatedText() string {
+func (p Page) TruncatedText() template.HTML {
 	chars := 0
 		for i, _ := range p.Content {
 			chars++
